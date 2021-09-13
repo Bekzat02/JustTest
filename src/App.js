@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from "./components/Navbar/Navbar";
+import React from "react";
+import {BrowserRouter, Route} from "react-router-dom";
+import AllNotesContainer from "./components/AllNotes/AllNotesContainer";
+import CreateNoteContainer from "./components/CreateNote/CreateNoteContainer";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <BrowserRouter>
+         <Provider store={store}>
+        <div className='app-wrapper'>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+
+                <Route path='/all'
+                       render={() => <AllNotesContainer/>}/>
+
+                <Route path='/create'
+                       render={() => <CreateNoteContainer/>}/>
+            </div>
+        </div>
+         </Provider>
+        </BrowserRouter>
+    );
 }
 
 export default App;
